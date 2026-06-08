@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recommendations Page</title>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="./about4.css">
+  
+  <style>
+    .footer-heading ul li a:hover {
+      transform: scale(1.05);
+    }
+
+    .content-column,
+    .main-1,
+    .main-2,
+    .main-3,
+    .main-4 {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .content-column.animate,
+    .main-1.animate,
+    .main-2.animate,
+    .main-3.animate,
+    .main-4.animate {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .main-img {
+      transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    }
+
+    .main-img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    button.btn-details:hover {
+      transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    }
+
+    button.btn-details:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .subscribe :hover {
+      color: black;
+    }
+  
+  
+    @import url('https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap');
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #e1a9c5;
+    }
+
+    /* Header Section */
+    .header {
+      background-image: url('https://images.pexels.com/photos/19976570/pexels-photo-19976570/free-photo-of-dentist-and-her-assistant-treating-a-male-patient.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: white;
+      text-align: center;
+      padding: 100px 20px;
+      position: relative;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .slider-slide h1 {
+      margin-bottom: 20px;
+    }
+
+    /* Content Section */
+    .content-section {
+
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      padding: 40px 20px;
+      background: linear-gradient(to bottom, #f6deea, #df8bb5);
+
+    }
+
+    .content-column {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .Img {
+      width: 200px;
+      height: 200px;
+      background-color: #606365;
+      border-radius: 50%;
+    }
+
+    .content-column button {
+
+      background-color: #FF69B4;
+      color: white;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* Main Section */
+
+    main {
+      padding: 50px;
+      padding-top: 10px;
+      background-color: #dbd8d8;
+      display: flex;
+      flex-direction: column;
+
+    }
+
+    .main-1,
+    .main-2,
+    .main-3,
+    .main-4 {
+      display: flex;
+      flex-direction: row;
+      gap: 50px;
+      margin-top: 50px;
+
+    }
+
+    .main-img {
+      height: 300px;
+      width: 300px;
+      border-radius: 10%;
+    }
+
+    .button-group a {
+      display: inline-flex;
+      width: 3.5rem;
+      height: 3.5rem;
+      background-color: transparent;
+      border: 1px solid #FF69B4;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      color: #FF69B4;
+      justify-content: center;
+      align-items: center;
+      margin: 0.2rem;
+      transition: .5s;
+      text-decoration: none;
+    }
+
+    .button-group a:hover {
+      background-color: #FF69B4;
+      color: white;
+    }
+
+    .footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 10px 0;
+      font-size: 14px;
+      width: 100%;
+    }
+
+    /* Text Styling */
+    .name p {
+      font-family: "SUSE", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: 300;
+      font-style: normal;
+      font-size: 2rem;
+      color: #cc3366;
+    }
+
+    .name h5 {
+      font-family: "SUSE", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: 600;
+      font-style: normal;
+      font-size: 3rem;
+      color: #cc3366;
+    }
+
+    /* Media Queries for Responsiveness */
+    @media (max-width: 1200px) {
+
+      .main-1,
+      .main-2,
+      .main-3,
+      .main-4 {
+        gap: 30px;
+      }
+
+      .main-img {
+        height: 250px;
+        width: 250px;
+      }
+
+    }
+
+    @media (max-width: 992px) {
+
+      .content-section {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .main-1,
+      .main-2,
+      .main-3,
+      .main-4 {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .main-img {
+        height: 200px;
+        width: 200px;
+      }
+    }
+
+    @media (max-width: 768px) {
+  
+      .header {
+        padding: 80px 10px;
+      }
+
+      .content-section {
+        padding: 20px 10px;
+      }
+
+      .main-1,
+      .main-2,
+      .main-3,
+      .main-4 {
+        gap: 20px;
+      }
+
+      .main-img {
+        height: 150px;
+        width: 150px;
+      }
+
+      main {
+        padding: 20px;
+      }
+    }
+
+    @media (max-width: 576px) {
+
+      .header {
+        padding: 60px 10px;
+      }
+
+      .main-img {
+        height: 120px;
+        width: 120px;
+      }
+
+      .content-column {
+        margin-bottom: 15px;
+      }
+
+      .linkedin-btn,
+      .email-btn {
+        font-size: 14px;
+        padding: 8px 16px;
+      }
+
+      p {
+        font-size: 14px;
+      }
+
+      h5 {
+        font-size: large;
+      }
+    }
+
+    .btn-details {
+      border-radius: 20px;
+      background-color: #FF69B4;
+
+    }
+
+    footer {
+      background-color: white;
+      padding: 20px 0;
+      border-top: 1px solid #b72222;
+    }
+
+    .container-footer {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2px;
+      justify-content: space-between;
+    }
+
+    .footer-section {
+      margin-bottom: 20px;
+      width: 100%;
+    }
+
+    @media (min-width: 768px) {
+      .footer-section {
+        width: 24%;
+      }
+    }
+
+    .footer-brand {
+      background-color: #FF69B4;
+      color: white;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .footer-brand .brand-icon {
+      font-size: 24px;
+      margin-right: 10px;
+    }
+
+    .footer-brand p {
+      margin: 10px 0;
+      line-height: 1.6;
+    }
+
+    .social-icons a {
+      color: white;
+      margin-right: 10px;
+      text-decoration: none;
+    }
+
+    .social-icons a:hover {
+      color: #2c2c2c;
+    }
+
+    .footer-heading {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .footer-section p {
+      margin: 0 0 10px;
+    }
+
+    .footer-section ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-section ul li {
+      margin-bottom: 10px;
+    }
+
+    .footer-section ul li a {
+      color: #4a4a4a;
+      text-decoration: none;
+    }
+
+    .footer-section ul li a:hover {
+      color: #2c2c2c;
+    }
+
+    .newsletter {
+      display: flex;
+    }
+
+    .newsletter input[type="email"] {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px 0 0 5px;
+      outline: none;
+      flex-grow: 1;
+    }
+
+    .newsletter button {
+      background-color: #f20ed7;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 0 5px 5px 0;
+      cursor: pointer;
+    }
+
+    .newsletter button i {
+      margin-left: 5px;
+    }
+
+    .footer-bottom {
+      background-color: #ffffff;
+      text-align: center;
+      padding: 20px 0;
+      margin-top: 30px;
+      color: #FF69B4;
+    }
+
+    #backtotop {
+      height: 40vh;
+      width: 100%;
+      background-color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    #backtotop #end {
+      height: 50%;
+      width: 100%;
+      background-color: #650350;
+    }
+
+    #backtotop h2 {
+
+      text-transform: uppercase;
+      font-size: 1vw;
+      cursor: pointer;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      height: 90px;
+      background: linear-gradient(to right, #F2E7D9, #F4D1D1);
+    }
+
+    .navbar .logo {
+      display: flex;
+      align-items: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #FF69B4;
+    }
+
+    .navbar .logo img {
+      width: 50px;
+      height: 50px;
+      margin-right: 10px;
+      border-radius: 50%;
+    }
+
+    .navbar nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .navbar nav ul li {
+      display: inline;
+    }
+
+    .navbar nav ul li a {
+      padding: 10px 20px;
+      text-decoration: none;
+      font-size: 1.2rem;
+      color: #333;
+      font-weight: 500;
+      align-items: center;
+      transition: color 0.3s ease;
+    }
+
+    .navbar nav ul li a:hover {
+      color: #FF69B4;
+      /* Hot pink on hover */
+    }
+
+    .navbar nav ul li a.btn {
+      margin: 0;
+      background-color: #FF69B4;
+      /* Hot pink button */
+      color: #fff;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+
+    .outline-button {
+      margin-bottom: 20px;
+      border: 1px solid #78063d;
+      border-radius: 50px;
+      padding: 10px 30px;
+      width: fit-content;
+      background-color: #d53ca7;
+    }
+
+    .outline-button:hover {
+      background-color: #840e4f;
+    }
+
+    .outline-button a {
+      color: #15010b;
+      text-decoration: none;
+      display: block;
+      /* Makes the anchor take up the full space of the button */
+      padding: 10px 30px;
+      /* Matches the button padding */
+    }
+
+    .outline-button:hover a {
+      color: white;
+    }
+
+
+    .docname {
+      font-family: "Oswald", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: 600;
+      font-style: normal;
+      font-size: 48px;
+    }
+
+    .upper {
+      font-family: "Oswald", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: 300;
+      font-size: 32px;
+      font-style: normal;
+    }
+
+    .lower {
+      font-family: "Oswald", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: 300;
+      font-size: 21px;
+      font-style: normal;
+    }
+
+    .carhead {
+
+      font-family: "SUSE", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: 700;
+      font-style: normal;
+      font-size: 48px;
+      color: #312f2f;
+    }
+
+    .carp {
+      font-family: "SUSE", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 32px;
+      color: #080808fb;
+    }
+
+    .d-block {
+
+      height: 600px;
+      width: 700px;
+    }
+  </style>
+
+</head>
+
+<body data-scroll-container>
+  <header class="navbar">
+    <div class="logo">
+      <img src="{{ url_for('static', filename='images/Logo.png') }}" alt="Logo" style="width: 70px;
+                height: 70px;
+                margin-right: 10px;
+                border-radius: 50%;">
+      <h5 style="font-weight: 700; font-size: 1.5rem; cursor: pointer ;;"><a href="/"
+          style="text-decoration:none; color: rgb(102, 9, 146)">Onco<span
+            style="font-weight: 700; font-size: 1.5rem; color: #da0670;">Vision</span>.</a></h5>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="/" style="padding: 10 px 20px;">Home</a></li>
+        <li><a href="/about" style="padding: 10 px 20px;">About</a></li>
+        <li><a href="/recommandations" style="color: #FF69B4;" style="padding: 10 px 20px;">Guidance</a></li>
+        <li class="change_gap"><a href="/predictor" class="btn" style="padding: 10 px 20px;">Get Started</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+        aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+        aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+        aria-label="Slide 3"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3"
+        aria-label="Slide 4"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4"
+        aria-label="Slide 5"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="https://i.ibb.co/kcgrq1H/AI-Transforming-Healthcare-Beyond-Boundaries.jpg" class="d-block w-100"
+          alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h5 class="carhead">AI-Powered Treatment Plans</h5>
+          <p class="carp"> Get personalized, AI-driven treatment recommendations tailored to your unique genetic profile
+            and medical history.</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="https://i.ibb.co/3Bv32R1/Positive-senior-female-doctor-in.jpg" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h5 class="carhead"> Expert Second Opinions</h5>
+          <p class="carp">Consult with top oncologists for a second opinion on your diagnosis and treatment options,
+            ensuring peace of mind.</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="https://i.ibb.co/3BM3hZz/Unlock-Your-Health-Potential-with-Nutrition-Counseling-Academy.jpg"
+          class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h5 class="carhead">Nutrition and Wellness Guidance</h5>
+          <p class="carp">Receive personalized dietary plans and wellness tips to complement your treatment and boost
+            your overall health.</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="https://i.ibb.co/9V4DL96/Doctor-during-consultation-for.jpg" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h5 class="carhead">Post-Treatment Care Support</h5>
+          <p class="carp">Access comprehensive post-treatment care, from mental health support to physical
+            rehabilitation, designed to help you recover faster.</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="https://i.ibb.co/HPFD8rP/Century-Link-Brand-Voice-Healthcare-Data-Too-Much-Information.jpg"
+          class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h5 class="carhead">Clinical Trial Matching</h5>
+          <p class="carp">Explore cutting-edge clinical trials tailored to your condition, offering advanced treatment
+            opportunities before they become widely available.</p>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+
+
+
+  <main style="background:linear-gradient(to bottom,#df8bb5,#f6deea);" class="main">
+    <div class="main-1" id="Arijit">
+      <div class="main-1-left">
+        <h2 class="docname">DR. SAPNA NANGIA</h2>
+        <p class="upper"><strong>DIRECTOR - HEAD NECK &amp; BREAST <br>DEPARTMENT OF RADIATION ONCOLOGY</strong></p>
+        <p class="lower">Dr. Sapna Nangia is a highly proficient clinical and radiation oncologist with versatile
+          experience spanning across cancer management, application of precise radiation...</p>
+        <button class="outline-button">
+          <a href="https://www.apollohospitals.com/proton-therapy/oncologists/dr-sapna-nangia/">View Profile &nbsp;<span
+              style="font-size: 17px;">➜</span></a>
+        </button>
+
+      </div>
+      <div class="main-1-right">
+        <img class="main-img" src="https://cdn.apollohospitals.com/ah-proton-stage/images/team/sapna.jpg" alt="image">
+      </div>
+    </div>
+    <div class="main-2" id="Paramita">
+      <div class="main-2-left">
+        <img class="main-img" src="https://cdn.apollohospitals.com/ah-proton-stage/images/team/dr-manjula-rao.jpg"
+          alt="image">
+      </div>
+      <div class="main-2-right">
+        <h2 class="docname">DR. MANJULA RAO</h2>
+        <p class="upper"><strong>CONSULTANT - ONCOPLASTIC BREAST SURGEON </strong></p>
+        <p class="lower">Dr Manjula Rao is an energetic Oncoplastic Breast Surgeon, with extensive experience in
+          treating breast cancer....</p>
+        <button class="outline-button">
+          <a href="https://www.apollohospitals.com/proton-therapy/oncologists/dr-manjula-rao/">View Profile &nbsp;<span
+              style="font-size: 17px;">➜</span></a>
+        </button>
+      </div>
+    </div>
+    <div class="main-3" id="Saunak">
+      <div class="main-3-left">
+        <h2 class="docname">Dr. Mukta Mahajan</h2>
+        <p class="upper"><strong>CONSULTANT - BREAST &amp; INTERVENTIONAL RADIOLOGY</strong></p>
+        <p class="lower">Dr. Mukta Mahajan is a skilled and dedicated Diagnostic and Interventional Radiologist with
+          subspecialty focus in breast, gynaecological, hepatobiliary...</p>
+        <button class="outline-button">
+          <a href="https://www.apollohospitals.com/proton-therapy/oncologists/dr-mukta-mahajan/">View Profile
+            &nbsp;<span style="font-size: 17px;">➜</span></a>
+        </button>
+
+      </div>
+      <div class="main-3-right">
+        <img class="main-img" src="https://cdn.apollohospitals.com/ah-proton-stage/images/team/dr-mukta-mahajan.jpg"
+          alt="image">
+      </div>
+    </div>
+    <div class="main-4" id="Anshu">
+      <div class="main-4-left">
+        <img class="main-img" src="https://cdn.apollohospitals.com/ah-proton-stage/2024/08/dr-priya-kapoor.jpg"
+          alt="image">
+      </div>
+      <div class="main-4-right">
+        <h2 class="docname">DR. PRIYA KAPOOR</h2>
+        <p class="upper"><strong>CONSULTANT - SURGICAL ONCOLOGY (GYNAECOLOGY) Breast</strong></p>
+        <p class="lower">Experience of over 10 years in oncology , specialised training in treating Gynaecological
+          malignancies including ovaries...</p>
+        <button class="outline-button">
+          <a href="https://www.apollohospitals.com/proton-therapy/oncologists/dr-priya-kapoor/">View Profile &nbsp;<span
+              style="font-size: 17px;">➜</span></a>
+        </button>
+      </div>
+    </div>
+  </main>
+  <div style="padding-top: 20px;">
+    <div class="container-footer">
+      <div class="footer-section footer-brand">
+        <div class="brand">
+          <i class="fas fa-paper-plane brand-icon"></i>
+          <span>OncoVision</span>
+        </div>
+        <p>Trusted . Have any query? Contact us, we are here for you.</p>
+        <div class="social-icons">
+          <a href="https://www.facebook.com/share/4TCmFH6YQYWHmYRC/?mibextid=qi2Omg"><i
+              class="fab fa-facebook-f"></i></a>
+          <a href="https://x.com/1208Pal22487?t=bDdaAhdC7y1ARMOyvq_QrA&s=08"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="https://www.instagram.com/arijit3039?utm_source=qr&igsh=MWZ3cG1sempxcjA3Ng=="><i
+              class="fab fa-instagram"></i></a>
+          <a href="https://youtube.com/@arijitpal-vg8zs?si=7ZE2ccihRz4gA0bB"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h3 class="footer-heading">&nbsp&nbsp Get In Touch</h3>
+        <p>&nbsp&nbsp&nbsp&nbsp oncovision12@gmail.com</p>
+        <p>&nbsp&nbsp&nbsp&nbsp +91 983 043 4897</p>
+        <p>&nbsp&nbsp&nbsp&nbsp kolkata, India.</p>
+
+      </div>
+      <div class=" footer-section">
+        <h3 class="footer-heading">Quick Links</h3>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/howitworks">How it works!</a></li>
+          <li><a href="/predictor">Prediction</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3 class="footer-heading">Newsletter</h3>
+        <div class="newsletter">
+          <input type="email" id="email" placeholder="Enter email...">
+          <button onclick="subscribe()">Subscribe <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 All Right Reserved OncoVision.</p>
+    </div>
+  </div>
+  <div id="backtotop">
+    <h2><i class='bx bxs-up-arrow'></i></h2>
+    <div id="end"></div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+
+  <script src="https://kit.fontawesome.com/c2090e130f.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://unpkg.com/locomotive-scroll/dist/locomotive-scroll.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/framer-motion/4.1.17/framer-motion.umd.min.js"></script>
+  <script>
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate');
+          }
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll('.content-column, .main-1, .main-2, .main-3, .main-4').forEach(el => {
+        observer.observe(el);
+      });
+    });
+    const scroll = new LocomotiveScroll({
+      el: document.querySelector('[data-scroll-container]'),
+      smooth: true,
+    });
+    document.querySelector("#backtotop h2").addEventListener("click", () => {
+      window.scrollTo({
+        left: 0,
+        top: 0,
+        behavior: 'smooth' // This makes the scrolling smooth
+      });
+    });
+
+
+  </script>
+
+  <script>
+    function subscribe() {
+      var email = document.getElementById('email').value;
+
+      if (email) {
+        fetch('/subscribe', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email: email }),
+        })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              alert('Thank you for subscribing to OncoVision!');
+            } else {
+              alert('Failed to subscribe: ' + (data.error || 'Unknown error'));
+            }
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+            alert('An error occurred. Please try again later.');
+          });
+      } else {
+        alert("Please enter a valid email.");
+      }
+    }
+
+  </script>
+
+
+
+  <script src="https://cdn.botpress.cloud/webchat/v2.1/inject.js"></script>
+  <script src="https://mediafiles.botpress.cloud/fac39a98-35cc-4edd-b3a5-8c484e2f77de/webchat/v2.1/config.js"></script>
+
+
+
+</body>
+
+</html

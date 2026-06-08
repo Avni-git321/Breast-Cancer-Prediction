@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://unpkg.com/locomotive-scroll@4.1.0/dist/locomotive-scroll.min.js"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #F4D1D1;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* --- Navbar --- */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            height: 90px;
+            background: linear-gradient(to right, #F2E7D9, #F4D1D1);
+        }
+
+        .navbar .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #FF69B4;
+        }
+
+        .navbar .logo img {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
+
+        .navbar nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .navbar nav ul li {
+            display: inline;
+        }
+
+        .navbar nav ul li a {
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            color: #333;
+            font-weight: 500;
+            align-items: center;
+            transition: color 0.3s ease;
+        }
+
+        .navbar nav ul li a:hover {
+            color: #FF69B4;
+        }
+
+        .navbar nav ul li a.btn {
+            margin: 0;
+            background-color: #FF69B4;
+            color: #fff;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        /* --- Dashboard Container --- */
+        .dashboard-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            background: linear-gradient(to bottom, #F2E7D9, #F4D1D1);
+            min-height: 100vh;
+        }
+
+        /* --- Welcome Section --- */
+        .welcome-section {
+            background: linear-gradient(135deg, #FF69B4, #FF1493);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            animation: float 1min infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateX(-50px) translateY(-50px);
+            }
+
+            100% {
+                transform: translateX(50px) translateY(50px);
+            }
+        }
+
+        .welcome-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .welcome-section h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .welcome-section p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .breast-cancer-awareness {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .awareness-icon {
+            font-size: 2rem;
+            color: #FFB6C1;
+        }
+
+        /* --- Stats Cards --- */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #fff, #f8f9fa);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 5px solid #FF69B4;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .stat-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #FF69B4, #FF1493);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        /* --- Main Content Grid --- */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 992px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* --- Health Records Section --- */
+        .health-records {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f8f9fa;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-icon {
+            color: #FF69B4;
+        }
+
+        .record-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .record-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .record-item:hover {
+            transform: scale(1.01);
+        }
+
+        .record-item-malignant {
+            border-left-color: #FF69B4;
+        }
+
+        .record-item-benign {
+            border-left-color: #00BFFF;
+        }
+
+        .record-info {
+            flex-grow: 1;
+        }
+
+        .record-info h5 {
+            margin: 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .record-info p {
+            margin: 5px 0 0;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .record-date {
+            font-size: 0.9rem;
+            color: #999;
+            margin-right: 20px;
+        }
+
+        .record-actions button {
+            background-color: #FF69B4;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .record-actions button:hover {
+            background-color: #e60073;
+        }
+
+        /* --- Sidebar Sections --- */
+        .sidebar-sections {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .action-card,
+        .tip-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .action-card h4,
+        .tip-card h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .action-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .action-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #555;
+            transition: color 0.3s ease;
+        }
+
+        .action-item:hover {
+            color: #FF69B4;
+        }
+
+        .action-item a {
+            text-decoration: none;
+            color: inherit;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .tip-card {
+            text-align: center;
+            background: linear-gradient(135deg, #FFB6C1, #FFD1D1);
+            color: #333;
+            border-left: 5px solid #FF69B4;
+        }
+
+        .tip-card h4 {
+            color: #FF69B4;
+        }
+
+        /* --- Modals --- */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .close-btn {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            cursor: pointer;
+        }
+
+        .close-btn:hover,
+        .close-btn:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-content h3 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 1.5rem;
+        }
+
+        .details-data-points {
+            margin-top: 20px;
+            text-align: left;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .details-data-points p {
+            margin: 0;
+            background-color: #f0f0f0;
+            padding: 8px 12px;
+            border-radius: 8px;
+            flex: 1 1 calc(50% - 15px);
+            box-sizing: border-box;
+        }
+
+        /* --- Footer --- */
+        .container-footer {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2px;
+            justify-content: space-between;
+        }
+
+        .footer-section {
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        @media (min-width: 768px) {
+            .footer-section {
+                width: 24%;
+            }
+        }
+
+        .footer-brand {
+            background-color: #FF69B4;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .footer-brand .brand-icon {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+
+        .footer-brand p {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+
+        .social-icons a {
+            color: white;
+            margin-right: 10px;
+            text-decoration: none;
+        }
+
+        .social-icons a:hover {
+            color: #2c2c2c;
+        }
+
+        .footer-heading {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .footer-section p {
+            margin: 0 0 10px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul li a {
+            color: #4a4a4a;
+            text-decoration: none;
+        }
+
+        .footer-section ul li a:hover {
+            color: #2c2c2c;
+        }
+
+        .newsletter {
+            display: flex;
+        }
+
+        .newsletter input[type="email"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px 0 0 5px;
+            outline: none;
+            flex-grow: 1;
+        }
+
+        .newsletter button {
+            background-color: #f20ed7;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+
+        .newsletter button i {
+            margin-left: 5px;
+        }
+
+        .footer-bottom {
+            background-color: #ffffff;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 30px;
+            color: #FF69B4;
+        }
+
+        #backtotop {
+            height: 40vh;
+            width: 100%;
+            background-color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        #backtotop #end {
+            height: 50%;
+            width: 100%;
+            background-color: #650350;
+        }
+
+        #backtotop h2 {
+            text-transform: uppercase;
+            font-size: 1vw;
+            cursor: pointer;
+        }
+
+        /* --- Loading Spinner --- */
+        .loading-spinner {
+            display: none;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #FF69B4;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 50px auto;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+    <div data-scroll-container>
+        <!-- Navbar -->
+        <header class="navbar">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='images/Logo.png') }}" alt="Logo" style="width: 70px;
+                height: 70px;
+                margin-right: 10px;
+                border-radius: 50%;">
+                <h5 style="font-weight: 700; font-size: 1.5rem; cursor: pointer;">
+                    <a href="/" style="text-decoration:none; color: rgb(102, 9, 146)">
+                        Onco<span style="font-weight: 700; font-size: 1.5rem; color: #da0670;">Vision</span>.
+                    </a>
+                </h5>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/recommendations">Guidance</a></li>
+                    <li><a href="/predictor" class="btn">Predictor</a></li>
+                    <li><a href="/logout">Logout</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Dashboard Container -->
+        <div class="dashboard-container">
+
+            <!-- Welcome Section -->
+            <section class="welcome-section">
+                <div class="welcome-content">
+                    <h1>Welcome Back, {{ username }}!</h1>
+                    <p>Your journey towards health and wellness is our priority. Here's a summary of your recent
+                        activities.
+                    </p>
+                    <div class="breast-cancer-awareness">
+                        <i class="fas fa-ribbon awareness-icon"></i>
+                        <span>Breast cancer awareness is key. Early detection saves lives.</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Stats Section -->
+            <section class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-card-header">
+                        <div class="stat-icon"><i class="fas fa-stethoscope"></i></div>
+                    </div>
+                    <div class="stat-value" id="total-predictions">0</div>
+                    <div class="stat-label">Total Predictions</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-card-header">
+                        <div class="stat-icon"><i class="fas fa-heartbeat"></i></div>
+                    </div>
+                    <div class="stat-value" id="benign-count">0</div>
+                    <div class="stat-label">Benign Predictions</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-card-header">
+                        <div class="stat-icon"><i class="fas fa-radiation"></i></div>
+                    </div>
+                    <div class="stat-value" id="malignant-count">0</div>
+                    <div class="stat-label">Malignant Predictions</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-card-header">
+                        <div class="stat-icon"><i class="fas fa-calendar-check"></i></div>
+                    </div>
+                    <div class="stat-value" id="last-prediction-date">N/A</div>
+                    <div class="stat-label">Last Prediction Date</div>
+                </div>
+            </section>
+
+            <!-- Main Content Grid -->
+            <main class="main-grid">
+                <!-- Health Records Section -->
+                <section class="health-records">
+                    <div class="section-header">
+                        <h3 class="section-title"><i class="fas fa-notes-medical section-icon"></i> Prediction History
+                        </h3>
+                    </div>
+                    <div id="loading-spinner" class="loading-spinner"></div>
+                    <div id="message-container" style="text-align: center; color: #888; font-style: italic;"></div>
+                    <div class="record-list" id="prediction-history-list"></div>
+                </section>
+
+                <!-- Sidebar -->
+                <aside class="sidebar-sections">
+                    <div class="action-card">
+                        <h4>Quick Actions</h4>
+                        <ul class="action-list">
+                            <li class="action-item"><a href="/predictor"><i class='bx bxs-flask'></i> Make a new
+                                    prediction</a></li>
+                            <li class="action-item"><a href="#" onclick="openModal('tipModal')"><i
+                                        class='bx bxs-info-circle'></i> Read a health tip</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="tip-card">
+                        <h4>Health Tip</h4>
+                        <p id="tip-text">
+                            Regular self-examinations are an important part of breast cancer awareness. Talk to your
+                            doctor
+                            for a personalized screening plan.
+                        </p>
+                    </div>
+                </aside>
+            </main>
+        </div>
+
+        <!-- Prediction Details Modal -->
+        <div id="detailsModal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn" onclick="closeModal('detailsModal')">&times;</span>
+                <h3 id="details-title">Prediction Details</h3>
+                <div id="details-content">
+                    <p><strong>Prediction:</strong> <span id="details-prediction"></span></p>
+                    <p><strong>Date:</strong> <span id="details-date"></span></p>
+                    <p><strong>Malignant Percentage:</strong> <span id="details-malignant-percentage"></span>%</p>
+                    <p><strong>Benign Percentage:</strong> <span id="details-benign-percentage"></span>%</p>
+
+                    <div class="details-data-points"></div>
+
+                    <div style="height: 250px; width: 100%; margin-top: 20px;">
+                        <canvas id="details-chart"></canvas>
+                    </div>
+                </div>
+                <button onclick="downloadChart()">Download Chart</button>
+            </div>
+        </div>
+
+        <!-- Tip Modal -->
+        <div id="tipModal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn" onclick="closeModal('tipModal')">&times;</span>
+                <h3>Daily Health Tip</h3>
+                <p id="tip-modal-text">Staying active and maintaining a healthy diet can reduce your risk of many
+                    diseases.
+                </p>
+            </div>
+        </div>
+
+
+
+        <footer style="padding-top: 20px;">
+
+            <div class="container-footer">
+
+                <div class="footer-section footer-brand">
+                    <div class="brand">
+                        <i class="fas fa-paper-plane brand-icon"></i>
+                        <span>OncoVision</span>
+                    </div>
+                    <p>Trusted . Have any query? Contact us, we are here for you.</p>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/share/4TCmFH6YQYWHmYRC/?mibextid=qi2Omg"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a href="https://x.com/1208Pal22487?t=bDdaAhdC7y1ARMOyvq_QrA&s=08"><i
+                                class="fa-brands fa-x-twitter"></i></a>
+                        <a href="https://www.instagram.com/arijit3039?utm_source=qr&igsh=MWZ3cG1sempxcjA3Ng=="><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="https://youtube.com/@arijitpal-vg8zs?si=7ZE2ccihRz4gA0bB"><i
+                                class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3 class="footer-heading">&nbsp Get In Touch</h3>
+                    <p>&nbsp&nbsp oncovision12@gmail.com</p>
+                    <p>&nbsp&nbsp +91 983 043 4897</p>
+                    <p>&nbsp&nbsp kolkata, India.</p>
+                </div>
+
+                <div class=" footer-section">
+                    <h3 class="footer-heading">Quick Links</h3>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about">About</a></li>
+                        <li><a href="/howitworks">How it works!</a></li>
+                        <li><a href="/predictor">Prediction</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3 class="footer-heading">Newsletter</h3>
+                    <div class="newsletter">
+                        <input type="email" id="email" placeholder="Enter email...">
+                        <button onclick="subscribe()">Subscribe <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 All Right Reserved OncoVision.</p>
+            </div>
+        </footer>
+
+        <div id="backtotop">
+            <h2><i class='bx bxs-up-arrow'></i></h2>
+            <div id="end"></div>
+        </div>
+    </div>
+
+
+
+
+
+    <script>
+        let chartInstance;
+        const spinner = document.getElementById('loading-spinner');
+        const messageContainer = document.getElementById('message-container');
+        let allPredictions = [];
+
+        function renderPredictionHistory(predictions) {
+            const list = document.getElementById('prediction-history-list');
+            list.innerHTML = '';
+            if (predictions.length === 0) {
+                messageContainer.innerText = "No prediction history found. Make a new prediction to get started!";
+                return;
+            }
+
+            let benignCount = 0, malignantCount = 0;
+            predictions.forEach(p => {
+                const predLabel = (p.prediction === "Malignant") ? "Malignant" : "Benign";
+                const predictionClass = predLabel.toLowerCase();
+                const item = document.createElement('div');
+                item.className = `record-item record-item-${predictionClass}`;
+                item.innerHTML = `
+                    <div class="record-info">
+                        <h5>${predLabel} Prediction</h5>
+                        <p>Benign: ${p.benign_percentage.toFixed(1)}% | Malignant: ${p.malignant_percentage.toFixed(1)}%</p>
+                    </div>
+                    <span class="record-date">${p.date}</span>
+                `;
+                item.addEventListener('click', () => openDetailsModal(p.id));
+                list.appendChild(item);
+
+                if (predLabel === 'Benign') benignCount++; else malignantCount++;
+            });
+
+            document.getElementById('total-predictions').innerText = predictions.length;
+            document.getElementById('benign-count').innerText = benignCount;
+            document.getElementById('malignant-count').innerText = malignantCount;
+            if (predictions.length > 0) {
+                document.getElementById('last-prediction-date').innerText = predictions[0].date.split(' ')[0];
+            }
+        }
+
+        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+
+        function openDetailsModal(id) {
+            const p = allPredictions.find(x => x.id === id);
+            if (!p) return;
+
+            document.getElementById('details-prediction').innerText = (p.prediction.toLowerCase() === "malignant") ? "Malignant" : "Benign";
+            document.getElementById('details-date').innerText = p.date.split(' ')[0];
+            document.getElementById('details-malignant-percentage').innerText = p.malignant_percentage.toFixed(1);
+            document.getElementById('details-benign-percentage').innerText = p.benign_percentage.toFixed(1);
+
+            const dataPointsContainer = document.querySelector('.details-data-points');
+            dataPointsContainer.innerHTML = '';
+            for (const key in p.input_data) {
+                const label = key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+                dataPointsContainer.innerHTML += `<p><strong>${label}:</strong> ${p.input_data[key]}</p>`;
+            }
+
+            if (chartInstance) chartInstance.destroy();
+            const ctx = document.getElementById('details-chart').getContext('2d');
+            chartInstance = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Malignant', 'Benign'],
+                    datasets: [{ data: [p.malignant_percentage, p.benign_percentage], backgroundColor: ['#FF69B4', '#00BFFF'] }]
+                }
+            });
+
+            openModal('detailsModal');
+        }
+
+        function downloadChart() {
+            if (!chartInstance) return;
+            const link = document.createElement('a');
+            link.href = chartInstance.toBase64Image();
+            link.download = 'prediction_chart.png';
+            link.click();
+        }
+
+        async function fetchPredictions() {
+            spinner.style.display = 'block';
+            messageContainer.innerText = "Loading prediction history...";
+            try {
+                const res = await fetch('/get_predictions');
+                const data = await res.json();
+                if (data.error) { messageContainer.innerText = data.error; return; }
+                allPredictions = data;
+                renderPredictionHistory(data);
+                messageContainer.innerText = "";
+            } catch {
+                messageContainer.innerText = "Failed to load history. Please try again later.";
+            } finally {
+                spinner.style.display = 'none';
+            }
+        }
+
+        window.onload = () => { fetchPredictions(); };
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const scroll = new LocomotiveScroll({
+                el: document.querySelector('[data-scroll-container]'),
+                smooth: true
+            });
+            document.querySelector("#backtotop h2").addEventListener("click", () => {
+                console.log("scroll");
+                scroll.scrollTo(0);
+            });
+        });
+
+
+        function subscribe() {
+            var email = document.getElementById('email').value;
+
+            if (email) {
+                fetch('/subscribe', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email: email }),
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert('Thank you for subscribing to OncoVision!');
+                        } else {
+                            alert('Failed to subscribe: ' + (data.error || 'Unknown error'));
+                        }
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                        alert('An error occurred. Please try again later.');
+                    });
+            } else {
+                alert("Please enter a valid email.");
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>

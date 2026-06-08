@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login Page</title>
+  <script src="https://unpkg.com/locomotive-scroll@4.1.0/dist/locomotive-scroll.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+
+  <style>
+    body {
+      font-family: "Roboto", sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f3c9f2;
+    }
+
+    .hero-section {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      background-image: url("{{ url_for('static', filename='images/hand.jpg') }}");
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    .card {
+      background-color: #f3c9f2;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .card h2 {
+      font-size: 40px;
+      font-weight: bold;
+      color: rgb(168, 38, 38);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-control {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      line-height: 1.5;
+      color: #495057;
+      background-color: transparent;
+      border: none;
+      border-bottom: 1px solid #495057;
+    }
+
+    .btn {
+      display: inline-block;
+      font-weight: 400;
+      text-align: center;
+      vertical-align: middle;
+      user-select: none;
+      border: 1px solid transparent;
+      padding: 0.375rem 0.75rem;
+      font-size: 1rem;
+      line-height: 1.5;
+      border-radius: 0.25rem;
+      transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+        border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+
+    .btn-dark {
+      color: #fff;
+      background-color: #141415;
+      border-color: #141415;
+    }
+
+    .btn-dark:hover {
+      background-color: #c7c6cc;
+      color: black;
+      border: none;
+    }
+
+    .text-link {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 14px;
+    }
+
+    .text-link a {
+      color: #464be5;
+      text-decoration: none;
+    }
+
+    footer {
+      background-color: white;
+      padding: 20px 0;
+      border-top: 1px solid #b72222;
+    }
+
+    .container-footer {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: space-between;
+    }
+
+    .footer-section {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .footer-brand {
+      background-color: #ff69b4;
+      color: white;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .footer-brand .brand-icon {
+      font-size: 24px;
+      margin-right: 10px;
+    }
+
+    .social-icons a {
+      color: white;
+      margin-right: 10px;
+      text-decoration: none;
+    }
+
+    .footer-heading {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .footer-section ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-section ul li {
+      margin-bottom: 10px;
+    }
+
+    .footer-section ul li a {
+      color: #4a4a4a;
+      text-decoration: none;
+    }
+
+    .footer-bottom {
+      background-color: #ffffff;
+      text-align: center;
+      padding: 20px 0;
+      margin-top: 30px;
+      color: #ff69b4;
+    }
+
+    #backtotop {
+      height: 40vh;
+      width: 100%;
+      background-color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    #backtotop #end {
+      height: 50%;
+      width: 100%;
+      background-color: #650350;
+    }
+
+    #backtotop h2 {
+      text-transform: uppercase;
+      font-size: 1vw;
+      cursor: pointer;
+      color: #ff69b4;
+    }
+  </style>
+</head>
+
+
+<body>
+  <div data-scroll-container>
+    <div class="hero-section" style="background-color: pink" data-scroll-section>
+      <div class="container">
+
+        <!-- Login Form -->
+        <div class="card" id="signInCard">
+          <h2>OncoVision</h2>
+
+          <form id="loginForm" action="/login" method="POST">
+            <div class="form-group">
+              <input type="email" class="form-control" id="email" placeholder="Enter your email" name="email"
+                required />
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" id="password" placeholder="Enter your password"
+                name="password" required />
+            </div>
+            <div class="form-group" style="
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+              ">
+              <div>
+                <input type="checkbox" id="rememberMe" />
+                <label for="rememberMe">Remember me</label>
+              </div>
+              <a href="/logout" style="text-decoration: none">Log Out</a>
+            </div>
+            <button type="submit" class="btn btn-dark" style="width: 100%; padding: 10px; margin-top: 20px">
+              Log In
+            </button>
+          </form>
+
+          <div class="text-link">
+            <p>
+              Don't have an account? <a href="/register" id="goToSignUp">Sign Up</a>
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+    <div data-scroll-section style="margin-top: 100px;">
+      <div style="padding-top: 20px;">
+
+        <div class="container-footer">
+          <div class="footer-section footer-brand">
+            <div class="brand">
+              <i class="fas fa-paper-plane brand-icon"></i>
+              <span>OncoVision</span>
+            </div>
+            <p>Trusted . Have any query? Contact us, we are here for you.</p>
+            <div class="social-icons">
+              <a href="https://www.facebook.com/share/4TCmFH6YQYWHmYRC/?mibextid=qi2Omg"><i
+                  class="fab fa-facebook-f"></i></a>
+              <a href="https://x.com/1208Pal22487?t=bDdaAhdC7y1ARMOyvq_QrA&s=08" target="_blank"><i
+                  class="fab fa-twitter"></i></a>
+              <a href="https://www.instagram.com/arijit3039?utm_source=qr&igsh=MWZ3cG1sempxcjA3Ng=="><i
+                  class="fab fa-instagram"></i></a>
+              <a href="https://youtube.com/@arijitpal-vg8zs?si=7ZE2ccihRz4gA0bB"><i class="fab fa-youtube"></i></a>
+            </div>
+          </div>
+
+          <div class="footer-section">
+            <h3 class="footer-heading"> &nbsp &nbsp Get In Touch</h3>
+            <p>&nbsp&nbsp oncovision12@gmail.com</p>
+            <p>&nbsp&nbsp +91 983 043 4897</p>
+            <p>&nbsp&nbsp kolkata, India.</p>
+          </div>
+
+          <div class=" footer-section">
+            <h3 class="footer-heading">Quick Links</h3>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/about">About</a></li>
+              <li><a href="/howitworks">How it works!</a></li>
+              <li><a href="/predictor">Prediction</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; 2025 All Right Reserved OncoVision.</p>
+        </div>
+      </div>
+
+      <div id="backtotop">
+        <h2><i class='bx bxs-up-arrow'></i></h2>
+        <div id="end"></div>
+      </div>
+
+    </div>
+  </div>
+
+
+
+  <script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const scroll = new LocomotiveScroll({
+        el: document.querySelector('[data-scroll-container]'),
+        smooth: true
+      });
+      document.querySelector("#backtotop h2").addEventListener("click", () => {
+        scroll.scrollTo(0);
+      });
+    });
+
+  </script>
+
+</body>
+
+</html>

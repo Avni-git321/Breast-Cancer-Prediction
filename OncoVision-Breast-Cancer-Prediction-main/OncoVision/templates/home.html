@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
+  <title>Home Page</title>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nerko+One&family=Sevillana&display=swap');
+
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #FFF0F5;
+      color: #333;
+    }
+
+    .animate {
+      /* Add your animation styles here */
+      animation: your_animation 1s ease-in-out;
+    }
+
+    @keyframes your_animation {
+      0% {
+        /* Initial state */
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      100% {
+        /* Final state */
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .container {
+      overflow: hidden;
+      width: 100%;
+      height: 100vh;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      height: 90px;
+      background: linear-gradient(to right, #F2E7D9, #F4D1D1);
+    }
+
+    .navbar .logo {
+      display: flex;
+      align-items: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #FF69B4;
+    }
+
+    .navbar .logo img {
+      width: 30px;
+      height: 30px;
+      margin-right: 10px;
+    }
+
+    .navbar nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .navbar nav ul li {
+      display: inline;
+    }
+
+    .navbar nav ul li a {
+      padding: 10px 20px;
+      text-decoration: none;
+      font-size: 1.2rem;
+      color: #333;
+      font-weight: 500;
+      align-items: center;
+      transition: color 0.3s ease;
+    }
+
+    .navbar nav ul li a:hover {
+      color: #FF69B4;
+    }
+
+    .navbar nav ul li a.btn {
+      margin: 0;
+      background-color: #FF69B4;
+      color: #fff;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+
+    .main {
+      position: relative;
+      width: 100%;
+      height: 90vh;
+      background-repeat: repeat;
+      background-position: center 10%;
+      background-size: contain;
+      background: linear-gradient(to right, #F2E7D9, #F4D1D1);
+    }
+
+    .hero-section {
+      text-align: center;
+      position: absolute;
+      top: 20%;
+      z-index: 1;
+      left: 50%;
+      transform: translate(-50%, -50%) !important;
+    }
+
+    .text-container h1 {
+      font-family: "Nerko One", cursive;
+      font-style: normal;
+      font-size: 6.5rem;
+      font-weight: 700;
+      color: #35b1e2;
+      /* Hot pink for main heading */
+      line-height: .85;
+    }
+
+    .image-grid {
+      position: absolute;
+      height: 60vh;
+      top: 20%;
+      display: grid;
+      grid-template-columns: .5fr 2fr .5fr;
+      justify-items: center;
+      align-items: center;
+      padding: 50px 20px;
+      background: linear-gradient(to right, #F2E7D9, #F4D1D1);
+      position: relative;
+    }
+
+    .hero-image:hover {
+      transform: scale(1.5);
+    }
+
+    .image-container {
+      max-width: 100%;
+      position: relative;
+    }
+
+    .image-container img {
+      width: 100%;
+      height: auto;
+      border-radius: 20px;
+      padding-bottom: 0;
+      position: relative;
+    }
+
+    .icon {
+      width: 120px;
+      height: 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: #fff;
+      border-radius: 50%;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      cursor: pointer;
+      padding: 20px;
+    }
+
+    .icon i {
+      font-size: 3rem;
+      color: #FF69B4;
+      transition: color 0.3s ease;
+    }
+
+    .icon-text {
+      font-size: 1rem;
+      color: #333;
+      text-align: center;
+      margin-top: 10px;
+      font-weight: 500;
+      line-height: 1.4;
+      transition: color 0.3s ease;
+    }
+
+    .icon:hover {
+      background-color: #FF69B4;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .icon:hover i {
+      color: #fff;
+    }
+
+    .icon:hover .icon-text {
+      color: #fff;
+    }
+
+    footer {
+      background-color: white;
+      padding: 20px 0;
+      border-top: 1px solid #b72222;
+    }
+
+    .container-footer {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2px;
+      justify-content: space-between;
+    }
+
+    .footer-section {
+      margin-bottom: 20px;
+      width: 100%;
+    }
+
+    @media (min-width: 768px) {
+      .footer-section {
+        width: 24%;
+      }
+    }
+
+    .footer-brand {
+      background-color: #FF69B4;
+      color: white;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .footer-brand .brand-icon {
+      font-size: 24px;
+      margin-right: 10px;
+    }
+
+    .footer-brand p {
+      margin: 10px 0;
+      line-height: 1.6;
+    }
+
+    .social-icons a {
+      color: white;
+      margin-right: 10px;
+      text-decoration: none;
+    }
+
+    .social-icons a:hover {
+      color: #2c2c2c;
+    }
+
+    .footer-heading {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .footer-section p {
+      margin: 0 0 10px;
+    }
+
+    .footer-section ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-section ul li {
+      margin-bottom: 10px;
+    }
+
+    .footer-section ul li a {
+      color: #4a4a4a;
+      text-decoration: none;
+    }
+
+    .footer-section ul li a:hover {
+      color: #2c2c2c;
+    }
+
+    .newsletter {
+      display: flex;
+    }
+
+    .newsletter input[type="email"] {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px 0 0 5px;
+      outline: none;
+      flex-grow: 1;
+    }
+
+    .newsletter button {
+      background-color: #f20ed7;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 0 5px 5px 0;
+      cursor: pointer;
+    }
+
+    .newsletter button i {
+      margin-left: 5px;
+    }
+
+    .footer-bottom {
+      background-color: #ffffff;
+      text-align: center;
+      padding: 20px 0;
+      margin-top: 30px;
+      color: #FF69B4;
+    }
+
+    #backtotop {
+      height: 40vh;
+      width: 100%;
+      background-color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    #backtotop #end {
+      height: 50%;
+      width: 100%;
+      background-color: #650350;
+    }
+
+    #backtotop h2 {
+      text-transform: uppercase;
+      font-size: 1vw;
+      cursor: pointer;
+      color: #FF69B4;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+
+      .navbar {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .navbar nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .main {
+        height: auto;
+        background-size: cover;
+      }
+
+      .hero-section {
+        top: 5%
+      }
+
+      .text-container h1 {
+        font-size: 3rem;
+      }
+
+      .change_gap {
+        gap: 8px;
+      }
+
+      .image-grid {
+        grid-template-columns: 1fr;
+        padding: 100px;
+      }
+
+      .icon {
+        width: 80px;
+        height: 80px;
+      }
+
+      .icon i {
+        font-size: 1.5rem;
+      }
+
+      .icon-text {
+        font-size: 0.8rem;
+      }
+
+      .container-footer {
+        flex-direction: column;
+      }
+
+      .newsletter {
+        flex-direction: column;
+      }
+
+      .newsletter input[type="email"] {
+        margin-bottom: 10px;
+      }
+
+      #backtotop h2 {
+        font-size: 1rem;
+        font-weight: 600;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .text-container h1 {
+        font-size: 2rem;
+      }
+
+      #backtotop h2 {
+        font-size: 1rem;
+        font-weight: 600;
+      }
+    }
+
+    .container1 {
+      background-color: #F9C0B7;
+      border-radius: 8px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem;
+      z-index: 1;
+      box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
+      margin-bottom: 100px;
+
+    }
+
+    .container1 .background-image {
+      position: absolute;
+      top: 20%;
+      left: 23%;
+      width: 100%;
+      height: 600px;
+      background-size: cover;
+      background-position: center;
+      z-index: -1;
+      transform-origin: center;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      transform: rotate(90deg);
+    }
+
+    .container1 h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+
+    .container1 p {
+      font-weight: 400;
+      font-size: 1.125rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .container1 a {
+      color: #1d4ed8;
+      text-decoration: none;
+    }
+
+    .container1 a:hover {
+      text-decoration: underline;
+    }
+
+    .container1 .grid {
+      display: grid;
+      gap: 1.5rem;
+      margin-top: 0rem;
+    }
+
+    @media (min-width: 768px) {
+      .grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .container1 .card {
+      background-color: #f36865;
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      text-align: center;
+      color: #ffffff;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+      transform: scale(1);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .container1 .card h2 {
+      font-size: 1.875rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .container1 .card p {
+      font-size: 1.125rem;
+      margin: 0;
+    }
+
+    .container1 .card:hover {
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .container2 {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      overflow: hidden;
+      gap: 40px;
+
+    }
+
+    .container2 .title {
+      text-align: center;
+      font-size: 3rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #2c3e50;
+
+    }
+
+    .container2 .description {
+      display: flex;
+      text-align: left;
+      font-size: 1.2rem;
+      margin-bottom: 40px;
+      color: #34495e;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .container2 .arrows {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .container2 .arrows i {
+      font-size: 2rem;
+      cursor: pointer;
+      margin: 0 15px;
+      color: #3498db;
+      transition: color 0.3s ease;
+    }
+
+    .container2 .arrows i:hover {
+      color: #8d1122;
+    }
+
+    .container2 #scroll-container {
+      flex: 2;
+      display: flex;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding: 20px 0;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+
+    }
+
+    .container2 #scroll-container::-webkit-scrollbar {
+      display: none;
+    }
+
+    .container2 .card {
+      background-color: rgb(104, 22, 22);
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      min-width: 300px;
+      margin-right: 30px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .container2 .card:hover {
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .container2 .card img {
+      margin-bottom: 20px;
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .container2 .card h2 {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #2c3e50;
+    }
+
+    .container2 .card p {
+      font-size: 1rem;
+      color: #34495e;
+    }
+
+    .container2 .card .expand-animation {
+      font-size: 1rem;
+      font-weight: bold;
+      color: #ef424d;
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .container2 .card:hover .expand-animation {
+      color: #640304;
+      transform: translateX(-50%) scale(1.1);
+    }
+
+    .container2 .card .static-image {
+      display: block;
+      width: 100%;
+    }
+
+    .container2 .card .gif-image {
+      display: none;
+    }
+
+    .container2 .card:hover .static-image {
+      display: none;
+      height: 500px;
+    }
+
+    .container2 .card:hover .gif-image {
+      display: block;
+      width: 100%;
+    }
+
+    .container4 {
+      background-color: #ffdce0;
+      display: flex;
+      align-items: center;
+      height: 70vh;
+      padding: 40px;
+      opacity: 0;
+      transform: translateY(50px);
+      margin-bottom: 100px;
+
+    }
+
+    .container4 .image-container {
+      position: relative;
+      margin-right: 40px;
+      margin-left: 50px;
+    }
+
+    .container4 .rounded-img {
+      transition: transform 0.5s ease;
+    }
+
+    .container4 .circle {
+      position: absolute;
+      border-radius: 50%;
+    }
+
+    .container4 .text-container {
+      padding-left: 100px;
+      min-width: 400px;
+    }
+
+    .container4 .text-container h2 {
+      font-size: 3.25rem;
+      font-weight: bold;
+      margin-bottom: 16px;
+    }
+
+    .container4 .text-container p {
+      font-size: 1.125rem;
+      margin-bottom: 16px;
+      justify-content: center;
+    }
+
+    .container4 ul {
+      list-style-type: none;
+    }
+
+    .container4 ul li {
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+    }
+
+    .container4 .checkmark {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      margin-right: 8px;
+      border: solid rgb(128, 0, 62);
+      border-width: 0 3px 3px 0;
+      transform: rotate(45deg);
+    }
+
+    .container4 .strip {
+      position: absolute;
+      bottom: 0%;
+      display: inline-block;
+      width: 100%;
+      height: 80px;
+      background-color: #feeef1;
+    }
+  </style>
+</head>
+
+<body>
+  <div data-scroll-container>
+    <div class="container" data-scroll-section>
+      <header class="navbar">
+        <div class="logo">
+          <img src="{{ url_for('static', filename='images/Logo.png') }}" alt="Logo" style="width: 70px;
+                height: 70px;
+                margin-right: 10px;
+                border-radius: 50%;">
+          <h5 style="font-weight: 700; font-size: 1.5rem; cursor: pointer;">
+            <a href="/" style="text-decoration:none; color: rgb(102, 9, 146)">Onco<span
+                style="font-weight: 700; font-size: 1.5rem; color: #da0670;">Vision</span>.
+            </a>
+          </h5>
+        </div>
+
+        <nav>
+          <ul>
+            <li><a href="/" style="color: #FF69B4;" style="padding: 10px 20px;">Home</a></li> 
+            <li><a href="/about" style="padding: 10px 20px;">About</a></li>
+            <li><a href="/recommendations" style="padding: 10px 20px;">Guidance</a></li>
+            <li class="change_gap"><a href="/predictor" class="btn" style="padding: 10px 20px;">Get Started</a></li>
+          </ul>
+        </nav>
+      </header>
+      
+      <div class="main" data-scroll-section>
+        <section class="hero-section">
+          <div class="text-container">
+            <h1>
+              <div class="desc"> Your <span id="typewriter"></span></div>
+            </h1>
+          </div>
+        </section data-scroll data-scroll-delay="5">
+        <section class="image-grid" data-scroll data-scroll-speed="-3">
+          <div class="icon chatbot  shake-icon" data-scroll>
+            <a href="https://www.healthline.com/health/breast-cancer" target="_blank">
+              <i class="fas fa-comments"></i> 
+            </a>
+            <p class="icon-text">Know everything about breast cancer</p>
+          </div>
+          <div class="image-container" data-scroll data-scroll-speed="2">
+            <img src="https://i.ibb.co/54KqmTQ/a97a8d1a91320d186d42365849e0022c-removebg-preview.png"
+              alt="Breast Cancer Awareness" class="hero-image  shake-image">
+          </div>
+          <div class="icon testing  shake-icon">
+            <a href="/about" target="_blank">
+              <i class="fas fa-flask"></i>
+            </a>
+            <p class="icon-text">we are together</p>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <div class="container2" data-scroll-section data-scroll-speed="-3">
+      <h1 class="title" data-scroll data-scroll-direction="horizontal" data-scroll-speed="4">How does it work?</h1>
+      <p class="description" data-scroll data-scroll-direction="horizontal" data-scroll-speed="-2"
+        style="padding-top:80px ;">
+        OncoVision is simple and straightforward to use. Start by adding your
+        report values; there's no limit to the amount of data you can input.
+        Once you've entered all the necessary details, click 'Submit' to
+        generate a graph. After the graph is generated, you can download the
+        result for further analysis.
+      </p>
+
+      <div class="arrows">
+        <i class="fas fa-chevron-left" id="scrollLeft"></i>
+        <i class="fas fa-chevron-right" id="scrollRight"></i>
+      </div>
+
+      <div id="scroll-container">
+        <div class="card" class="static-image" style="background-color: #f4d1d1">
+          <img class="gif-image" style=" width: 100%; height: fit-content;" src="https://i.ibb.co/YQSxFrN/gif1-gif.gif"
+            alt="Get Started" />
+          <h2>1. Get Started</h2>
+          <p>Click on "Get Started" to begin your journey with OncoVision.</p>
+          <a href="/howitworks"><span class="expand-animation">Learn More</span></a>
+        </div>
+        <div class="card" class="static-image" style="background-color: #f2e7d9">
+          <img class="gif-image" src="https://i.ibb.co/vmCLkLL/gif2.gif" style="height: fit-content;"
+            alt="Enter Details" />
+          <h2>2. Enter Details</h2>
+          <p>
+            Enter the required values in the details section to provide us with
+            the necessary information.
+          </p>
+          <a href="/howitworks"><span class="expand-animation">Learn More</span></a>
+        </div>
+        <div class="card " class="static-image" style="background-color: #f4d1d1">
+          <img class="gif-image" src="https://i.ibb.co/xXM2N17/gif3.gif" style="height: fit-content;" alt="Submit" />
+          <h2>3. Submit</h2>
+          <p>Click "Submit" to process your information and get the results.</p>
+          <a href="/howitworks"><span class="expand-animation">Learn More</span></a>
+        </div>
+        <div class="card" class="static-image" style="background-color: #f2e7d9">
+          <img src="https://i.ibb.co/yBZWvxr/gif4.gif" class="gif-image" style="height: fit-content;"
+            alt="View and Download Results" />
+          <h2>4. View and Download Results</h2>
+          <p>
+            View the generated graph and download the results for your
+            reference.
+          </p>
+          <a href="/howitworks"><span class="expand-animation">Learn More</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="container4" style="overflow: hidden;" data-scroll-section data-scroll>
+      <div class="image-container" data-scroll data-scroll-direction="horizontal" data-scroll-speed="6">
+        <img src="https://i.ibb.co/gRn7np6/pic5.jpg"
+          alt="A happy person raising one arm, wearing a yellow jacket and jeans" width="600" height="500"
+          class="rounded-img" />
+      </div>
+
+      <div class="text-container" data-scroll data-scroll-direction="horizontal" data-scroll-speed="-3">
+        <h2 data-scroll>Join Our Community</h2>
+        <p>
+          Breast cancer is one of the most common cancers in the world,
+          affecting millions of women globally. Early detection can
+          significantly increase survival rates.
+        </p>
+        <ul>
+          <li>
+            <span class="checkmark"></span> Over 2 million new cases of breast
+            cancer diagnosed annually.
+          </li>
+          <li>
+            <span class="checkmark"></span> Early detection improves survival
+            rates by up to 90%.
+          </li>
+          <li>
+            <span class="checkmark"></span> AI-powered tools can identify early
+            signs of breast cancer with high accuracy.
+          </li>
+          <li>
+            <span class="checkmark"></span> AI reduces human error and improves
+            screening processes.
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div data-scroll-section data-scroll id="stick" style="padding-bottom: 50px;">
+      <div class="container1" style="overflow: hidden; opacity: 1; ;" data-scroll data-scroll-sticky
+        data-scroll-target="#stick">
+        <div class="background-image">
+          <img width="500px" height="800px" src="https://i.ibb.co/VLQPjL9/pic6.jpg" alt="Background" />
+        </div>
+        <div style="width: 50%; margin-left: 12vw">
+          <h1 style="margin-bottom: 10px">
+            About OncoVision
+          </h1>
+          <p>
+            OncoVision is an AI-powered breast cancer detector designed to offer
+            early and accurate detection of cancer. It utilizes advanced machine
+            learning algorithms trained on extensive data to help users identify
+            potential signs of cancer quickly and efficiently, ensuring peace of
+            mind and timely medical intervention.
+          </p>
+          <p>
+            Learn more
+            <a href="/about">about us.</a>
+          </p>
+        </div>
+        <div class="grid">
+          <div class="card">
+            <h2>Model Accuracy</h2>
+            <p>
+              OncoVision achieves over 97% accuracy, helping to diagnose breast
+              cancer at its earliest stages, allowing patients to seek timely
+              treatment.
+            </p>
+          </div>
+          <div class="card">
+            <h2>User Friendly</h2>
+            <p>
+              The platform is designed to be easy to navigate for users of all
+              technical levels, offering a seamless experience for scan uploads
+              and results.
+            </p>
+          </div>
+          <div class="card">
+            <h2>Accessible</h2>
+            <p>
+              OncoVision is accessible from any device with internet access,
+              ensuring that patients can receive results anytime, anywhere.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- footer -->
+    <div data-scroll-section style="margin-top: 100px;">
+      <div style="padding-top: 20px;" data-scroll data-scroll-delay="-3.4">
+        <div class="container-footer">
+          <div class="footer-section footer-brand">
+            <div class="brand">
+              <i class="fas fa-paper-plane brand-icon"></i>
+              <span>OncoVision</span>
+            </div>
+            <p>Trusted . Have any query? Contact us, we are here for you.</p>
+            <div class="social-icons">
+              <a href="https://www.facebook.com/share/4TCmFH6YQYWHmYRC/?mibextid=qi2Omg"><i
+                  class="fab fa-facebook-f"></i></a>
+              <a href="https://x.com/1208Pal22487?t=bDdaAhdC7y1ARMOyvq_QrA&s=08" target="_blank"><i
+                  class="fab fa-twitter"></i></a>
+              <a href="https://www.instagram.com/arijit3039?utm_source=qr&igsh=MWZ3cG1sempxcjA3Ng=="><i
+                  class="fab fa-instagram"></i></a>
+              <a href="https://youtube.com/@arijitpal-vg8zs?si=7ZE2ccihRz4gA0bB"><i class="fab fa-youtube"></i></a>
+            </div>
+          </div>
+          <div class="footer-section">
+            <h3 class="footer-heading"> &nbsp &nbsp Get In Touch</h3>
+            <p>&nbsp&nbsp oncovision12@gmail.com</p>
+            <p>&nbsp&nbsp +91 983 043 4897</p>
+            <p>&nbsp&nbsp kolkata, India.</p>
+          </div>
+          <div class=" footer-section">
+            <h3 class="footer-heading">Quick Links</h3>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/about">About</a></li>
+              <li><a href="/howitworks">How it works!</a></li>
+              <li><a href="/predictor">Prediction</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3 class="footer-heading">Newsletter</h3>
+            <div class="newsletter">
+              <input type="email" id="email" placeholder="Enter email...">
+              <button onclick="subscribe()">Subscribe <i class="fas fa-arrow-right"></i></button>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 All Right Reserved OncoVision.</p>
+        </div>
+      </div>
+      <div id="backtotop">
+        <h2><i class='bx bxs-up-arrow'></i></h2>
+        <div id="end"></div>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://unpkg.com/locomotive-scroll/dist/locomotive-scroll.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/framer-motion/4.1.17/framer-motion.umd.min.js"></script>
+  <script src="https://unpkg.com/locomotive-scroll/dist/locomotive-scroll.min.js"></script>
+  <script>
+    // GSAP animation 
+    document.addEventListener("DOMContentLoaded", function () {
+      document.addEventListener('DOMContentLoaded', () => {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('animate');
+            } else {
+              entry.target.classList.remove('animate');
+            }
+          });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.container, .container, .container2 .footer-section').forEach(el => {
+          observer.observe(el);
+        });
+      });
+
+      const text = "Wellness, Our Priority";
+      let i = 0;
+      const typewriterElement = document.getElementById("typewriter");
+
+      function typeWriter() {
+        if (i < text.length) {
+          typewriterElement.innerHTML += text.charAt(i);
+          i++;
+          setTimeout(typeWriter, 500); // Adjust typing speed here
+        } else {
+          setTimeout(() => {
+            typewriterElement.innerHTML = '';
+            i = 0;
+            console.log("Restarting typewriter animation.");
+            typeWriter();
+          }, 1000); // Delay before restarting the typing animation
+        }
+      }
+
+      typeWriter();
+      const section = document.querySelector('.container-footer');
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            section.classList.add('visible');
+          } else {
+            section.classList.remove('visible');
+          }
+        });
+      }, {
+        threshold: 0.1 // Adjust this value to trigger the animation earlier or later
+      });
+
+      observer.observe(section);
+    });
+
+    gsap.from('.text-container h1', { duration: 1.5, y: 50, opacity: 0, ease: "power4.out" });
+    gsap.from('.hero-image', { duration: 1.5, scale: 0.8, opacity: 0, ease: "power4.out" });
+    gsap.from('.icon', { duration: 1, y: 30, opacity: 0, stagger: 0.2, ease: "power4.out" });
+    gsap.from('.how-it-works.text-container p', { duration: 1, y: 50, opacity: 0, ease: "power4.out" });
+    gsap.to('.shake-image', {
+      duration: 1,
+      x: 20,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut"
+    });
+
+    // Hover effects
+    $('.text-container h1').each(function () {
+      const text = $(this);
+
+      text.on('mouseover', function () {
+        gsap.to(text, { duration: 0.5, scale: 1.1, ease: "power4.out" });
+      });
+
+      text.on('mouseout', function () {
+        gsap.to(text, { duration: 0.5, scale: 1, ease: "power4.out" });
+      });
+    });
+
+    // Shake animation for icons
+    function shakeIcons() {
+      gsap.to('.shake-icon', {
+        duration: 1,
+        x: 15,
+        repeat: 1,
+        yoyo: true,
+        ease: "sine.inOut",
+        stagger: 0.2
+      });
+    }
+
+    // Trigger shake animation every 10 seconds
+    setInterval(shakeIcons, 10000); // Adjust interval as needed
+
+    const card = document.querySelectorAll(".container1 .card");
+
+    card.forEach((card) => {
+      card.addEventListener("mouseenter", () => {
+        gsap.to(card, {
+          scale: 1.1,
+          duration: 0.3,
+          ease: "power2.out",
+          boxShadow: "0 10px 30px rgba(0, 0, 0, 0.3)",
+        });
+      });
+
+      card.addEventListener("mouseleave", () => {
+        gsap.to(card, {
+          scale: 1,
+          duration: 0.3,
+          ease: "power2.out",
+          boxShadow: "0 5px 15px rgba(0, 0, 0, 0.1)",
+        });
+      });
+    });
+
+    const scrollContainer = document.getElementById("scroll-container");
+    const cards = document.querySelectorAll(".container2 .card");
+    let cardWidth =
+      cards[0].offsetWidth +
+      parseInt(window.getComputedStyle(cards[0]).marginRight);
+
+    function scrollLeft() {
+      scrollContainer.scrollBy({
+        left: -cardWidth,
+        behavior: "smooth",
+      });
+    }
+
+    function scrollRight() {
+      scrollContainer.scrollBy({
+        left: cardWidth,
+        behavior: "smooth",
+      });
+    }
+
+    // Add event listeners
+    document
+      .getElementById("scrollLeft")
+      .addEventListener("click", scrollLeft);
+    document
+      .getElementById("scrollRight")
+      .addEventListener("click", scrollRight);
+
+    // GSAP Animation for Auto-Rotation
+    let index = 0;
+    let direction = 1;
+    const delay = 3000;
+    let autoRotateTimeout;
+
+    function autoRotate() {
+      const newScrollPosition = (index + direction) * cardWidth;
+
+      gsap.to(scrollContainer, {
+        scrollLeft: newScrollPosition,
+        duration: 1,
+        ease: "power2.inOut",
+        onComplete: () => {
+          index = (index + direction + cards.length) % cards.length;
+
+          if (index === 0 || index === cards.length - 1) {
+            direction *= -1;
+          }
+
+          autoRotateTimeout = setTimeout(autoRotate, delay);
+        },
+      });
+    }
+
+    function stopAutoRotate() {
+      clearTimeout(autoRotateTimeout);
+    }
+
+    function resumeAutoRotate() {
+      autoRotateTimeout = setTimeout(autoRotate, delay);
+    }
+
+    cards.forEach((card) => {
+      card.addEventListener("mouseenter", stopAutoRotate);
+      card.addEventListener("mouseleave", resumeAutoRotate);
+    });
+
+    // Initialize the auto-rotation
+    autoRotate();
+
+    // Update card width on window resize
+    window.addEventListener("resize", () => {
+      const newCardWidth =
+        cards[0].offsetWidth +
+        parseInt(window.getComputedStyle(cards[0]).marginRight);
+      if (newCardWidth !== cardWidth) {
+        cardWidth = newCardWidth;
+        stopAutoRotate();
+        resumeAutoRotate();
+      }
+    });
+
+    // Scroll-triggered animation for container 4
+    gsap.to(".container4", {
+      opacity: 1,
+      y: 0,
+      duration: 1.5,
+      ease: "bounce.out",
+      ease: "elastic.out(1, 0.3)",
+      ease: "power2.out",
+    });
+
+    // Image and circle animation
+    gsap.from(".container4 .image-container", {
+      duration: 2,
+      x: -200,
+      y: -200,
+      scale: 0,
+      ease: "bounce.out(1,.3)",
+    });
+
+    // Hover animation for the image
+    const image = document.querySelector(".container4 .rounded-img");
+    image.addEventListener("mouseenter", () => {
+      gsap.to(image, { scale: 1.1, duration: 0.5, ease: "power2.out" });
+    });
+    image.addEventListener("mouseleave", () => {
+      gsap.to(image, { scale: 1, duration: 0.5, ease: "power2.out" });
+    });
+
+    
+    // Update scroll speed for .navbar
+    document.addEventListener("DOMContentLoaded", function () {
+      const scroll = new LocomotiveScroll({
+        el: document.querySelector('[data-scroll-container]'),
+        smooth: true
+      });
+      document.querySelector("#backtotop h2").addEventListener("click", () => {
+        console.log("scroll");
+        scroll.scrollTo(0);
+      });
+    });
+
+
+    function subscribe() {
+      var email = document.getElementById('email').value;
+
+      if (email) {
+        fetch('/subscribe', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email: email }),
+        })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              alert('Thank you for subscribing to OncoVision!');
+            } else {
+              alert('Failed to subscribe: ' + (data.error || 'Unknown error'));
+            }
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+            alert('An error occurred. Please try again later.');
+          });
+      } else {
+        alert("Please enter a valid email.");
+      }
+    }
+  </script>
+
+  <script src="https://cdn.botpress.cloud/webchat/v2.1/inject.js"></script>
+  <script src="https://mediafiles.botpress.cloud/fac39a98-35cc-4edd-b3a5-8c484e2f77de/webchat/v2.1/config.js"></script>
+</body>
+
+</html>
